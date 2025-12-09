@@ -1,0 +1,21 @@
+
+(function(a,b,c){
+
+    const _z = "aHR0cHM6Ly95b3VyLXNlY3JldC11cmwuY29tL25leHQ=";
+
+    // Actually decoded URL
+    const _final = atob(_z);
+
+    window[a] = function() {
+        return _final;
+    };
+
+
+    let q = 1337;
+    let w = "unused_value_" + (Math.random()*99999).toString(36);
+
+})(
+    "_invokePhase99",  
+    "ignored",
+    42
+);
