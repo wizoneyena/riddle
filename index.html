@@ -14,10 +14,15 @@
     border:1px solid #333;
     padding:20px;
     max-width:600px;
+    margin-bottom:30px;
+  }
+  .locked {
+    opacity:0.3;
+    pointer-events:none;
   }
   input {
     padding:6px;
-    width:200px;
+    width:240px;
   }
   button {
     margin-left:8px;
@@ -33,22 +38,53 @@
 
 <h1>🎄 Christmas Hunt</h1>
 
-<div class="step">
+<!-- STEP 4 -->
+<div class="step" id="step4">
   <h2>Step 4</h2>
   <p>Time stopped here.</p>
 
   <input id="yearInput" placeholder="answer">
   <button onclick="checkYear()">Submit</button>
-  <button onclick="showHint()">Hint</button>
+  <button onclick="showHint('hint4')">Hint</button>
 
-  <div class="hint" id="hint">
-    A clock tower in London once fell silent.
+  <div class="hint" id="hint4">
+    When?
   </div>
 </div>
 
+<!-- STEP 5 -->
+<div class="step locked" id="step5">
+  <h2>Step 5</h2>
+  <p>From this year, a new light guided the southern plains.</p>
+
+  <input id="step5Input" placeholder="answer">
+  <button onclick="checkStep5()">Submit</button>
+  <button onclick="showHint('hint5')">Hint</button>
+
+  <div class="hint" id="hint5">
+    Think about the USA and the person who became leader at that time.
+  </div>
+</div>
+
+<!-- STEP 6 -->
+<div class="step locked" id="step6">
+  <h2>Step 6</h2>
+  <p>The broadcast is live:</p>
+  <p>
+    <a target="_blank" id="ytLink" href="#">▶ Watch the broadcast</a>
+  </p>
+
+  <input id="step6Input" placeholder="enter the code from broadcast">
+  <button onclick="checkStep6()">Submit</button>
+</div>
+
 <script>
-function showHint(){
-  document.getElementById("hint").style.display = "block";
+function showHint(id){
+  document.getElementById(id).style.display = "block";
+}
+
+function unlock(id){
+  document.getElementById(id).classList.remove("locked");
 }
 
 async function sha256(str){
@@ -59,14 +95,42 @@ async function sha256(str){
     .join("");
 }
 
+/* STEP 4 CHECK */
 async function checkYear(){
   const input = yearInput.value.trim();
   const h = await sha256(input);
 
   if(h === "4c3aada37cf7fd3819b2da502a15f78f7ce5a2ce6d584b630344ff00dffc74ac"){
+    unlock("step5");
     document.body.insertAdjacentHTML(
       "beforeend",
-      "<p>✓ Signal locked. Continue.</p>"
+      "<p>✓ Step 4 complete. Proceed to Step 5.</p>"
+    );
+  }
+}
+
+/* STEP 5 CHECK */
+async function checkStep5(){
+  const input = step5Input.value.trim().toUpperCase();
+  const h = await sha256(input);
+  if(h === "7b4c3c6020c5c6b3ea29f8985f24e17ae287cecf2309330ed018b38f5bfc1b31"){ 
+    unlock("step6");
+    document.getElementById("ytLink").href = "https://www.youtube.com/watch?v=YOUTUBE_ID";
+    document.body.insertAdjacentHTML(
+      "beforeend",
+      "<p>✓ Step 5 complete. Watch the broadcast and enter the code in Step 6.</p>"
+    );
+  }
+}
+
+/* STEP 6 CHECK */
+async function checkStep6(){
+  const input = step6Input.value.trim();
+  const h = await sha256(input);
+  if(h === "HASH_STEP6"){ 
+    document.body.insertAdjacentHTML(
+      "beforeend",
+      "<p>🎉 Step 6 complete! You unlocked the next part.</p>"
     );
   }
 }
