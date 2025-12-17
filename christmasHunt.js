@@ -20,7 +20,7 @@ async function sha256(str){
 async function checkYear(){
   const input = yearInput.value.trim();
   const h = await sha256(input);
-  if(h === "4c3aada37cf7fd3819b2da502a15f78f7ce5a2ce6d584b630344ff00dffc74ac"){
+  if(h === "1421ff611c93756cbc675b827ea48e8f3ef11c922b0046364c3953d936ef9394"){
     unlock("step5");
   }
 }
