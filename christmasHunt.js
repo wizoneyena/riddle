@@ -67,6 +67,55 @@ async function checkStep9(){
   const input = step9Input.value.trim().toUpperCase();
   const h = await sha256(input);
   if(h === "5a2a380d218ec1d8a23df694afee2dc30a7fd5c0ef79bbcac0df4687e20004cd"){
-    // final step, nothing to unlock
+    invokeEnd();
   }
 }
+
+
+function invokeEnd(){
+  const finalDiv = document.createElement("div");
+  finalDiv.style.marginTop = "40px";
+  finalDiv.style.color = "#0f0";
+  finalDiv.innerHTML = `
+    <p>This puzzle does not finish itself.</p>
+    <p>Open your tools and run _("key")  where the key is your previous answer without spaces and full upper-case letters.</p>
+  `;
+  document.body.appendChild(finalDiv);
+}
+
+(function(){
+
+  async function sha256(str){
+    const buf = new TextEncoder().encode(str);
+    const hash = await crypto.subtle.digest("SHA-256", buf);
+    return [...new Uint8Array(hash)]
+      .map(b => b.toString(16).padStart(2,"0"))
+      .join("");
+  }
+
+
+  const _u = "aHR0cHM6Ly9ib3VsZGVyYnVnbGUuY29tL25NM1did0pY";
+
+  const _k = "07ba1531a238e0f930744243a9578e1822e597496e04dd2fa4ccbe5349d4985f";
+
+  function _d(b){
+    return atob(b);
+  }
+
+  window._ = async function(x){
+
+    if(x === undefined){
+      return "This is not automatic. Try calling this function with a parameter.";
+    }
+
+    const normalized = x.toUpperCase().replace(/\s+/g,"");
+    const h = await sha256(normalized);
+
+    if(h !== _k){
+      return "Wrong key.";
+    }
+
+    return _d(_u);
+  };
+
+})();
