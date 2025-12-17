@@ -83,6 +83,21 @@
   </div>
 </div>
 
+<!-- STEP 7 -->
+<div class="step locked" id="step7">
+  <h2>Step 7</h2>
+  <p>I hope someone is going to fix this in the future, but who?</p>
+  <p><code>iħ ∂ψ(x,t)/∂t = - (ħ² / 2m) ∂²ψ(x,t)/∂x² + V(x)ψ(x,t)</code></p>
+
+  <input id="step7Input" placeholder="answer">
+  <button onclick="checkStep7()">Submit</button>
+  <button onclick="showHint('hint7')">Hint</button>
+
+  <div class="hint" id="hint7">
+    Schrödinger
+  </div>
+</div>
+  
 <script>
 function showHint(id){
   document.getElementById(id).style.display = "block";
@@ -133,9 +148,24 @@ async function checkStep6(){
   const input = step6Input.value.trim();
   const h = await sha256(input);
   if(h === "1ca9df921014be9c108e675bb687218fee99c4229fdaa9e7e5c7fcd1c3eddaed"){ 
+    unlock("step7");
     document.body.insertAdjacentHTML(
       "beforeend",
       "<p>🎉 Step 6 complete! You unlocked the next part.</p>"
+    );
+  }
+}
+
+
+  /* STEP 7 CHECK */
+async function checkStep7(){
+  const input = step7Input.value.trim().toUpperCase();
+  const h = await sha256(input);
+  if(h === "e632bc0b82b86d1160f355c955d313e2922f7af54348b5d09d53992c77adf46d"){ 
+    // unlock next step here, e.g., step8
+    document.body.insertAdjacentHTML(
+      "beforeend",
+      "<p>✓ Step 7 complete! You can proceed.</p>"
     );
   }
 }
