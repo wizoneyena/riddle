@@ -55,14 +55,14 @@
 <!-- STEP 5 -->
 <div class="step locked" id="step5">
   <h2>Step 5</h2>
-  <p>From this year, a new light guided the southern plains.</p>
+  <p>39th leader</p>
 
   <input id="step5Input" placeholder="answer">
   <button onclick="checkStep5()">Submit</button>
   <button onclick="showHint('hint5')">Hint</button>
 
   <div class="hint" id="hint5">
-    Think about the USA and the person who became leader at that time.
+    Atleast I won the Nobel Prize in 2002.
   </div>
 </div>
 
@@ -76,6 +76,11 @@
 
   <input id="step6Input" placeholder="enter the code from broadcast">
   <button onclick="checkStep6()">Submit</button>
+  <button onclick="showHint('hint5')">Hint</button>
+
+  <div class="hint" id="hint5">
+    SWSCENXTST-
+  </div>
 </div>
 
 <script>
@@ -115,7 +120,7 @@ async function checkStep5(){
   const h = await sha256(input);
   if(h === "7b4c3c6020c5c6b3ea29f8985f24e17ae287cecf2309330ed018b38f5bfc1b31"){ 
     unlock("step6");
-    document.getElementById("ytLink").href = "https://www.youtube.com/watch?v=YOUTUBE_ID";
+    document.getElementById("ytLink").href = "https://youtu.be/-S0kCUDyBQ4";
     document.body.insertAdjacentHTML(
       "beforeend",
       "<p>✓ Step 5 complete. Watch the broadcast and enter the code in Step 6.</p>"
@@ -127,7 +132,7 @@ async function checkStep5(){
 async function checkStep6(){
   const input = step6Input.value.trim();
   const h = await sha256(input);
-  if(h === "HASH_STEP6"){ 
+  if(h === "1ca9df921014be9c108e675bb687218fee99c4229fdaa9e7e5c7fcd1c3eddaed"){ 
     document.body.insertAdjacentHTML(
       "beforeend",
       "<p>🎉 Step 6 complete! You unlocked the next part.</p>"
