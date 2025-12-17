@@ -1,41 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Access Portal</title>
-
-    <style>
-        body {
-            background: #0d1117;
-            color: #c9d1d9;
-            font-family: Consolas, monospace;
-            padding: 40px;
-        }
-
-        .subtle { opacity: 0.7; letter-spacing: 0.05em; }
-    </style>
+<meta charset="UTF-8">
+<title>Christmas Hunt</title>
+<style>
+  body {
+    background:#0d0d0d;
+    color:#eee;
+    font-family: monospace;
+    padding:40px;
+  }
+  .step {
+    border:1px solid #333;
+    padding:20px;
+    max-width:600px;
+  }
+  input {
+    padding:6px;
+    width:200px;
+  }
+  button {
+    margin-left:8px;
+  }
+  .hint {
+    display:none;
+    color:#aaa;
+    margin-top:10px;
+  }
+</style>
 </head>
 <body>
 
-<h1>Access Terminal</h1>
-<p class="subtle">Status: standby…</p>
+<h1>🎄 Christmas Hunt</h1>
 
-<p>Note to QA: The UI behaves as expected.</p>  
-<p> If you want the defect, try checking the underlying implementation.</p>
+<div class="step">
+  <h2>Step 4</h2>
+  <p>Time stopped here.</p>
 
-<!-- 
-    Nothing else here. You can stop digging
-    ->  https://imgur.com/a/fsPLkyl
--->
+  <input id="yearInput" placeholder="answer">
+  <button onclick="checkYear()">Submit</button>
+  <button onclick="showHint()">Hint</button>
+
+  <div class="hint" id="hint">
+    A clock tower in London once fell silent.
+  </div>
+</div>
 
 <script>
-    function analyze() {
-        return "No further data available.";
-    }
+function showHint(){
+  document.getElementById("hint").style.display = "block";
+}
+
+async function sha256(str){
+  const buf = new TextEncoder().encode(str);
+  const hash = await crypto.subtle.digest("SHA-256", buf);
+  return [...new Uint8Array(hash)]
+    .map(b => b.toString(16).padStart(2,"0"))
+    .join("");
+}
+
+async function checkYear(){
+  const input = yearInput.value.trim();
+  const h = await sha256(input);
+
+  if(h === "4c3aada37cf7fd3819b2da502a15f78f7ce5a2ce6d584b630344ff00dffc74ac"){
+    document.body.insertAdjacentHTML(
+      "beforeend",
+      "<p>✓ Signal locked. Continue.</p>"
+    );
+  }
+}
 </script>
 
-<script src="assets/loader.js"></script>
+<!-- https://imgur.com/a/IMGUR_ID -->
 
 </body>
 </html>
