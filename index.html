@@ -133,7 +133,7 @@ async function checkYear(){
 async function checkStep5(){
   const input = step5Input.value.trim().toUpperCase();
   const h = await sha256(input);
-  if(h === "7b4c3c6020c5c6b3ea29f8985f24e17ae287cecf2309330ed018b38f5bfc1b31"){ 
+  if(h === "7030e079131fa00df2d4c5a5f6952ce58cb8defb7c01f6769e69669e5ab7aad9"){ 
     unlock("step6");
     document.getElementById("ytLink").href = "https://youtu.be/-S0kCUDyBQ4";
     document.body.insertAdjacentHTML(
