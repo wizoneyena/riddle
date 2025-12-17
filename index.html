@@ -17,8 +17,7 @@
     margin-bottom:30px;
   }
   .locked {
-    opacity:0.3;
-    pointer-events:none;
+    display:none; /* hide locked steps */
   }
   input {
     padding:6px;
@@ -62,7 +61,7 @@
   <button onclick="showHint('hint5')">Hint</button>
 
   <div class="hint" id="hint5">
-    Atleast I won the Nobel Prize in 2002.
+    At least I won the Nobel Prize in 2002.
   </div>
 </div>
 
@@ -97,79 +96,41 @@
     Schrödinger
   </div>
 </div>
-  
-<script>
-function showHint(id){
-  document.getElementById(id).style.display = "block";
-}
 
-function unlock(id){
-  document.getElementById(id).classList.remove("locked");
-}
+<!-- STEP 8 -->
+<div class="step locked" id="step8">
+  <h2>Step 8 <span style="font-size:0.8em; color:#aaa;">M3</span></h2>
+  <p>These German codes are so weird... At least they used the number <b>3</b> everywhere.</p>
 
-async function sha256(str){
-  const buf = new TextEncoder().encode(str);
-  const hash = await crypto.subtle.digest("SHA-256", buf);
-  return [...new Uint8Array(hash)]
-    .map(b => b.toString(16).padStart(2,"0"))
-    .join("");
-}
+  <pre style="background:#111; color:#0f0; padding:15px; border-radius:5px;">
+dunmx ihmgw wedsy dqnmx blooq kdzty waqr
+  </pre>
 
-/* STEP 4 CHECK */
-async function checkYear(){
-  const input = yearInput.value.trim();
-  const h = await sha256(input);
+  <input id="step8Input" placeholder="enter decoded message">
+  <button onclick="checkStep8()">Submit</button>
+  <button onclick="showHint('hint8')">Hint</button>
 
-  if(h === "4c3aada37cf7fd3819b2da502a15f78f7ce5a2ce6d584b630344ff00dffc74ac"){
-    unlock("step5");
-    document.body.insertAdjacentHTML(
-      "beforeend",
-      "<p>✓ Step 4 complete. Proceed to Step 5.</p>"
-    );
-  }
-}
+  <div class="hint" id="hint8">
+   World War II (1939). Maybe this command would have worked back then?
+  </div>
+</div>
 
-/* STEP 5 CHECK */
-async function checkStep5(){
-  const input = step5Input.value.trim().toUpperCase();
-  const h = await sha256(input);
-  if(h === "7030e079131fa00df2d4c5a5f6952ce58cb8defb7c01f6769e69669e5ab7aad9"){ 
-    unlock("step6");
-    document.getElementById("ytLink").href = "https://youtu.be/-S0kCUDyBQ4";
-    document.body.insertAdjacentHTML(
-      "beforeend",
-      "<p>✓ Step 5 complete. Watch the broadcast and enter the code in Step 6.</p>"
-    );
-  }
-}
+<!-- STEP 9 -->
+<div class="step locked" id="step9">
+  <h2>Step 9</h2>
+  <p>ISTQB challenge:</p>
+  <p>What is the black-box test design technique that divides input data into groups to reduce the number of test cases while still covering all scenarios?</p>
 
-/* STEP 6 CHECK */
-async function checkStep6(){
-  const input = step6Input.value.trim();
-  const h = await sha256(input);
-  if(h === "1ca9df921014be9c108e675bb687218fee99c4229fdaa9e7e5c7fcd1c3eddaed"){ 
-    unlock("step7");
-    document.body.insertAdjacentHTML(
-      "beforeend",
-      "<p>🎉 Step 6 complete! You unlocked the next part.</p>"
-    );
-  }
-}
+  <input id="step9Input" placeholder="Enter your answer">
+  <button onclick="checkStep9()">Submit</button>
+  <button onclick="showHint('hint9')">Hint</button>
 
+  <div class="hint" id="hint9">
+    No hint for you buddy, you should know this
+  </div>
+</div>
 
-  /* STEP 7 CHECK */
-async function checkStep7(){
-  const input = step7Input.value.trim().toUpperCase();
-  const h = await sha256(input);
-  if(h === "e632bc0b82b86d1160f355c955d313e2922f7af54348b5d09d53992c77adf46d"){ 
-    // unlock next step here, e.g., step8
-    document.body.insertAdjacentHTML(
-      "beforeend",
-      "<p>✓ Step 7 complete! You can proceed.</p>"
-    );
-  }
-}
-</script>
+<script src="christmasHunt.js"></script>
 
 <!-- https://imgur.com/a/IMGUR_ID -->
 
