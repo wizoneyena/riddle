@@ -48,7 +48,7 @@ async function checkStep6(){
 async function checkStep7(){
   const input = step7Input.value.trim().toUpperCase();
   const h = await sha256(input);
-  if(h === "e632bc0b82b86d1160f355c955d313e2922f7af54348b5d09d53992c77adf46d"){ 
+  if(h === "bebadab3a48d2e693892083de207d31ff09e218b7e12f918eccdb507950b6c6e"){ 
     unlock("step8");
   }
 }
