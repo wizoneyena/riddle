@@ -5,7 +5,7 @@ function showHint(id){
 function unlock(id){
   const step = document.getElementById(id);
   step.classList.remove("locked");
-  step.style.display = "block"; // show the next step
+  step.style.display = "block"; 
 }
 
 async function sha256(str){
@@ -72,13 +72,20 @@ async function checkStep9(){
 }
 
 
-function invokeEnd(){
+function invokeEnd() {
   const finalDiv = document.createElement("div");
   finalDiv.style.marginTop = "40px";
-  finalDiv.style.color = "#0f0";
+  finalDiv.style.color = "#0f0"; 
   finalDiv.innerHTML = `
-    <p>This puzzle does not finish itself. If only I had the perfect JS interpreter to run _("key"). Try interacting with the page the way developers do.</p>
-    <p>"key" is your previous answer without spaces and full upper-case letters.</p>
+    <p>
+      This puzzle does not finish itself, you need to use javascript. 
+      I <strong style="color:red;">PROMISE</strong> you need to 
+      <strong style="color:red;">AWAIT</strong> for the answer, just use 
+      <strong style="color:red;">_("key")</strong>. Try interacting with the page the way developers do.
+    </p>
+    <p>
+      "key" is your previous answer without spaces and full upper-case letters.
+    </p>
   `;
   document.body.appendChild(finalDiv);
 }
