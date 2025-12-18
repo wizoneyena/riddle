@@ -32,6 +32,59 @@
     color:#aaa;
     margin-top:10px;
   }
+
+  .info-icon {
+  position: relative;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 50%;
+  background: #2c7be5;
+  color: #fff;
+  cursor: help;
+  font-family: sans-serif;
+}
+
+.tooltip {
+  visibility: hidden;
+  opacity: 0;
+  width: max-content;
+  max-width: 220px;
+  background: #111;
+  color: #eee;
+  text-align: left;
+  padding: 8px 10px;
+  border-radius: 6px;
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  line-height: 1.4;
+  white-space: normal;
+  transition: opacity 0.2s ease;
+  z-index: 100;
+}
+
+.tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #111 transparent transparent transparent;
+}
+
+.info-icon:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
 </style>
 </head>
 <body>
@@ -41,18 +94,23 @@
   <!-- STEP 1 -->
 <div class="step"">
   <h2>Step 1</h2>
-  <p>QR code scan</p>
+  <p>QR code scan ✅</p>
 </div>
 
   <!-- STEP 2 -->
 <div class="step">
   <h2>Step 2</h2>
+  <span class="info-icon">i
+  <span class="tooltip">
+    Requires no input on this site
+  </span>
+</span>
   <p style="color:#777; font-size:0.9em; margin-bottom:30px;">
   Some clues aren’t visible at first glance.<br>
   Curious minds tend to look under the hood.<em>(Or maybe the head?)</em>.
 </p>
-
-  <div class="hint" id="hint">
+  <button onclick="showHint('hint2')">Hint</button>
+  <div class="hint" id="hint2">
     We are looking for an image
   </div>
 </div>
@@ -60,8 +118,14 @@
   <!-- STEP 3 -->
 <div class="step">
   <h2>Step 3</h2>
+  <span class="info-icon">i
+  <span class="tooltip">
+    Requires no input on this site
+  </span>
+</span>
   <p>I wonder <b>WHERE</b> it leads me</p>
-  <div class="hint" id="hint">
+  <button onclick="showHint('hint3')">Hint</button>
+  <div class="hint" id="hint3">
     Most data is not visible by eye 
   </div>
 </div>
@@ -69,6 +133,11 @@
 <!-- STEP 4 -->
 <div class="step" id="step4">
   <h2>Step 4</h2>
+  <span class="info-icon">i
+  <span class="tooltip">
+    Reach the end of step 3 first
+  </span>
+</span>
   <p>Time stopped here for the first time, but when?</p>
 
   <input id="yearInput" placeholder="answer">
