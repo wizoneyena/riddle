@@ -77,8 +77,8 @@ function invokeEnd(){
   finalDiv.style.marginTop = "40px";
   finalDiv.style.color = "#0f0";
   finalDiv.innerHTML = `
-    <p>This puzzle does not finish itself.</p>
-    <p>Open your tools and run _("key")  where the key is your previous answer without spaces and full upper-case letters.</p>
+    <p>This puzzle does not finish itself. If only I had the perfect JS interpreter to run _("key"). Try interacting with the page the way developers do.</p>
+    <p>"key" is your previous answer without spaces and full upper-case letters.</p>
   `;
   document.body.appendChild(finalDiv);
 }
